@@ -3,10 +3,13 @@ jobs:
   build:
     docker:
       - image: circleci/node:10.16-browsers
-    environment:
-      - APP_VERSION: "$(cat package.json | grep version | head -1 | awk -F: '{ print $2 }' | sed 's/[\",]//g')"
     steps:
       - checkout
+      - run:
+          name: Update PATH and Define Environment Variable at Runtime
+          command: |
+            echo "export APP_VERSION=$(cat package.json | grep version | head -1 | awk -F: '{ print $2 }' | sed 's/[\",]//g')" >> $BASH_ENV
+            source $BASH_ENV
       - run:
           name: 'Current branch'
           command: echo $CIRCLE_BRANCH
