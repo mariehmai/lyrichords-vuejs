@@ -3,8 +3,17 @@ jobs:
   build:
     docker:
       - image: circleci/node:10.16-browsers
+    environment:
+      TAG: $(cat package.json | grep version | head -1 | awk -F: '{ print $2 }' | sed 's/[",]//g')
     steps:
       - checkout
       - run:
-          name: 'What branch am I on?'
-          command: echo ${CIRCLE_BRANCH}
+          name: 'Current branch'
+          command: echo $CIRCLE_BRANCH
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - run: |
+          TAG=0.1.$CIRCLE_BUILD_NUM
+          docker build -t mariehmai/lyrichords:$TAG .
+          docker login -u $DOCKER_USER -p $DOCKER_PASS
+          docker push mariehmai/lyrichords:$TAG
