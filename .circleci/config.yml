@@ -6,17 +6,12 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Update PATH and Define Environment Variable at Runtime
-          command: |
-            echo "export $APP_VERSION=$(cat package.json | grep version | head -1 | awk -F: '{ print $2 }' | sed 's/[\",]//g')" >> $BASH_ENV
-            source $BASH_ENV
-      - run:
           name: 'Current branch'
           command: echo $CIRCLE_BRANCH
       - setup_remote_docker:
           docker_layer_caching: true
       - run: |
-          TAG=$APP_VERSION-web-$CIRCLE_BUILD_NUM
+          TAG=0.1.0-web-$CIRCLE_BUILD_NUM
           docker build -t mariehmai/lyrichords:$TAG .
           docker login -u $DOCKER_USER -p $DOCKER_PASS
           docker push mariehmai/lyrichords:$TAG
