@@ -21,8 +21,10 @@ jobs:
           docker_layer_caching: true
       - run:
           name: 'Publishing in Docker Hub: mariehmai/lyrichords'
-          command: |
-          TAG=0.1.0-web-$CIRCLE_BUILD_NUM
-          docker build -t mariehmai/lyrichords:$TAG .
-          docker login -u $DOCKER_USER -p $DOCKER_PASS
-          docker push mariehmai/lyrichords:$TAG
+          command:
+            [
+              'TAG=0.1.0-web-$CIRCLE_BUILD_NUM',
+              'docker build -t mariehmai/lyrichords:$TAG .',
+              'docker login -u $DOCKER_USER -p $DOCKER_PASS',
+              'docker push mariehmai/lyrichords:$TAG',
+            ]
