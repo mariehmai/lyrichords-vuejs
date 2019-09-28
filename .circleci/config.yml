@@ -4,22 +4,24 @@ jobs:
     docker:
       - image: circleci/node:10.16.3
     steps:
-      - run:
-          name: 'Current branch'
-          command: echo $CIRCLE_BRANCH
       - checkout
       - restore_cache:
           key: dependency-cache-{{ checksum "package-lock.json" }}
       - run:
-          name: 'Install dependencies'
+          name: 'Restoring dependencies'
           command: npm install
       - save_cache:
           key: dependency-cache-{{ checksum "package-lock.json" }}
           paths:
             - ./node_modules
+      - run:
+          name: 'Running test'
+          command: npm run test:unit
       - setup_remote_docker:
           docker_layer_caching: true
-      - run: |
+      - run:
+          name: 'Publishing in Docker Hub: mariehmai/lyrichords'
+          command: |
           TAG=0.1.0-web-$CIRCLE_BUILD_NUM
           docker build -t mariehmai/lyrichords:$TAG .
           docker login -u $DOCKER_USER -p $DOCKER_PASS
