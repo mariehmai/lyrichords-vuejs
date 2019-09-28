@@ -13,6 +13,7 @@ jobs:
       - run: |
           VERSION="echo $(cat package.json | grep version | head -1 | awk -F: '{ print $2 }' | sed 's/[",]//g')"
           TAG=$VERSION-web-$CIRCLE_BUILD_NUM
+          echo VERSION = $VERSION, TAG = $TAG
           docker build -t mariehmai/lyrichords:$TAG .
           docker login -u $DOCKER_USER -p $DOCKER_PASS
           docker push mariehmai/lyrichords:$TAG
