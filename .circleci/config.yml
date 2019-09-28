@@ -45,7 +45,7 @@ workflows:
             - checkout_code
       - test:
           requires:
-            - checkout_code
+            - build
       - publish:
           requires:
             - build
