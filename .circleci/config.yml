@@ -35,11 +35,14 @@ workflows:
     jobs:
       - checkout
       - build:
-        requires:
-          - checkout
+          requires:
+            - checkout
       - test:
-        requires:
-          - checkout
+          requires:
+            - checkout
       - publish:
-        requires:
-          - build
+          requires:
+            - build
+          filters:
+            branches:
+              only: master
