@@ -11,9 +11,9 @@ jobs:
       - setup_remote_docker:
           docker_layer_caching: true
       - run: |
-          VERSION="$(cat package.json | grep version | head -1 | awk -F: '{ print $2 }' | sed 's/[",]//g')"
-          TAG=$VERSION-web-$CIRCLE_BUILD_NUM
-          echo VERSION = $VERSION, TAG = $TAG
+          APP_VERSION="$(cat package.json | grep version | head -1 | awk -F: '{ print $2 }' | sed 's/[",]//g')"
+          TAG=$APP_VERSION-web-$CIRCLE_BUILD_NUM
+          echo $TAG double print $TAG
           docker build -t mariehmai/lyrichords:$TAG .
           docker login -u $DOCKER_USER -p $DOCKER_PASS
           docker push mariehmai/lyrichords:$TAG
