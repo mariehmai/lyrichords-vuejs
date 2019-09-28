@@ -1,11 +1,13 @@
 version: 2
 jobs:
-  checkout:
+  checkout_code:
     docker:
       - image: circleci/node:10.16.3
     steps:
       - checkout
   build:
+    docker:
+      - image: circleci/node:10.16.3
     steps:
       - restore_cache:
           key: dependency-cache-{{ checksum "package-lock.json" }}
@@ -17,11 +19,15 @@ jobs:
           paths:
             - ./node_modules
   test:
+    docker:
+      - image: circleci/node:10.16.3
     steps:
       - run:
           name: 'Running test'
           command: npm run test:unit
   publish:
+    docker:
+      - image: circleci/node:10.16.3
     steps:
       - setup_remote_docker:
           docker_layer_caching: true
@@ -31,15 +37,15 @@ jobs:
 
 workflows:
   version: 2
-  build-test-publish:
+  build_test_publish:
     jobs:
-      - checkout
+      - checkout_code
       - build:
           requires:
-            - checkout
+            - checkout_code
       - test:
           requires:
-            - checkout
+            - checkout_code
       - publish:
           requires:
             - build
