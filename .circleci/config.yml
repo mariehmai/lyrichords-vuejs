@@ -42,7 +42,7 @@ jobs:
   publish:
     environment:
       - IMAGE_NAME: mariehmai/lyrichords
-      - IMAGE_TAG: 0.1.0-web-$CIRCLE_BUILD_NUM
+      - IMAGE_TAG: 0.1.0-web
     docker:
       - image: circleci/node:10.16.3
     working_directory: ~/lyrichords
@@ -53,7 +53,7 @@ jobs:
           docker_layer_caching: true
       - run:
           name: Publishing Docker Image in Docker Hub
-          command: docker build -t $IMAGE_NAME:$IMAGE_TAG . && docker login -u $DOCKER_USER -p $DOCKER_PASS && docker push $IMAGE_NAME:$IMAGE_TAG
+          command: docker build -t $IMAGE_NAME:$IMAGE_TAG-$CIRCLE_BUILD_NUM . && docker login -u $DOCKER_USER -p $DOCKER_PASS && docker push $IMAGE_NAME:$IMAGE_TAG
 workflows:
   version: 2
   build_test_publish:
