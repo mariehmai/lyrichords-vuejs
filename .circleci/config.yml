@@ -3,11 +3,17 @@ jobs:
   checkout_code:
     docker:
       - image: circleci/node:10.16.3
+    working_directory: ~/lyrichords
     steps:
       - checkout
+      - save_cache:
+          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
+          paths:
+            - ~/lyrichords
   build:
     docker:
       - image: circleci/node:10.16.3
+    working_directory: ~/lyrichords
     steps:
       - restore_cache:
           key: dependency-cache-{{ checksum "package-lock.json" }}
@@ -21,13 +27,17 @@ jobs:
   test:
     docker:
       - image: circleci/node:10.16.3
+    working_directory: ~/lyrichords
     steps:
+      - restore_cache:
+          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
       - run:
           name: 'Running test'
           command: npm run test:unit
   publish:
     docker:
       - image: circleci/node:10.16.3
+    working_directory: ~/lyrichords
     steps:
       - setup_remote_docker:
           docker_layer_caching: true
