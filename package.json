@@ -29,17 +29,24 @@
     "lint-staged": "^8.1.5",
     "mem": "^4.0.0",
     "node-sass": "^4.9.0",
+    "pre-commit": "^1.2.2",
     "prettier": "^1.18.2",
     "sass-loader": "^7.1.0",
     "vue-template-compiler": "^2.6.10"
   },
   "gitHooks": {
-    "pre-commit": "lint-staged"
+    "pre-commit": [
+      "lint-staged",
+      "test:unit"
+    ]
   },
   "lint-staged": {
     "*.{js,vue}": [
       "vue-cli-service lint",
       "git add"
     ]
-  }
+  },
+  "pre-commit": [
+    "test:unit"
+  ]
 }
