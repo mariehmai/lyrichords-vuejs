@@ -44,6 +44,8 @@ jobs:
       - image: circleci/node:10.16.3
     working_directory: ~/lyrichords
     steps:
+      - restore_cache:
+          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
       - setup_remote_docker:
           docker_layer_caching: true
       - run:
@@ -62,7 +64,7 @@ workflows:
             - build
       - publish:
           requires:
-            - build
+            - test
           filters:
             branches:
               only: master
