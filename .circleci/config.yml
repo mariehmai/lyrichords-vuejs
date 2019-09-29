@@ -40,8 +40,11 @@ jobs:
           name: Running test
           command: npm run test:unit
   publish:
+    environment:
+      - IMAGE_NAME: mariehmai/lyrichords
+      - IMAGE_TAG: 0.1.0-web
     docker:
-      - image: circleci/node:10.16.3
+      - image: circleci/buildpack-deps:stretch
     working_directory: ~/lyrichords
     steps:
       - restore_cache:
@@ -49,11 +52,17 @@ jobs:
       - setup_remote_docker:
           docker_layer_caching: true
       - run:
-          name: 'Publishing in Docker Hub: mariehmai/lyrichords'
-          command: TAG=0.1.0-web-$CIRCLE_BUILD_NUM && docker build -t mariehmai/lyrichords:$TAG . && docker login -u $DOCKER_USER -p $DOCKER_PASS && docker push mariehmai/lyrichords:$TAG
+          name: Build Docker image
+          command: |
+            docker build -t $IMAGE_NAME:$IMAGE_TAG-$CIRCLE_BUILD_NUM .
+      - run:
+          name: Publish Docker image to Docker Hub
+          command: |
+            echo "$DOCKER_PASS" | docker login -u $DOCKER_USER --password-stdin
+            docker push $IMAGE_NAME:$IMAGE_TAG-$CIRCLE_BUILD_NUM
 workflows:
   version: 2
-  build_test_publish:
+  build_test:
     jobs:
       - checkout_code
       - build:
@@ -62,9 +71,15 @@ workflows:
       - test:
           requires:
             - build
-      - publish:
-          requires:
-            - test
+  build_publish:
+    jobs:
+      - checkout_code:
           filters:
             branches:
               only: master
+      - publish:
+          filters:
+            branches:
+              only: master
+          requires:
+            - checkout_code
