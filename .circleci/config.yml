@@ -1,11 +1,4 @@
-version: 2.1
-executors:
-  docker_publisher:
-    environment:
-      - IMAGE_NAME: mariehmai/lyrichords
-      - IMAGE_TAG: 0.1.0-web
-    docker:
-      - image: circleci/buildpack-deps:stretch
+version: 2
 jobs:
   checkout_code:
     docker:
@@ -46,8 +39,12 @@ jobs:
       - run:
           name: Running test
           command: npm run test:unit
-  docker_build:
-    executor: docker_publisher
+  docker_publish:
+    environment:
+      - IMAGE_NAME: mariehmai/lyrichords
+      - IMAGE_TAG: 0.1.0-web
+    docker:
+      - image: circleci/buildpack-deps:stretch
     working_directory: ~/lyrichords
     steps:
       - restore_cache:
@@ -59,25 +56,9 @@ jobs:
           command: |
             docker build -t $IMAGE_NAME:$IMAGE_TAG-$CIRCLE_BUILD_NUM .
       - run:
-          name: Archive Docker image
-          command: docker save -o image.tar $IMAGE_NAME
-      - persist_to_workspace:
-          root: .
-          paths:
-            - ./image.tar
-  docker_publish:
-    executor: docker_publisher
-    steps:
-      - attach_workspace:
-          at: /tmp/workspace
-      - setup_remote_docker
-      - run:
-          name: Load archived Docker images
-          command: docker load -i /tmp/workspace/image.tar
-      - run:
           name: Publish Docker Image to Docker Hub
           command: |
-            docker login -u $DOCKER_USER -p $DOCKER_PASS
+            echo "$DOCKER_PASS" | docker login -u $DOCKER_USER --password-stdin
             docker push $IMAGE_NAME:$IMAGE_TAG-$CIRCLE_BUILD_NUM
 workflows:
   version: 2
@@ -93,9 +74,6 @@ workflows:
   build_publish:
     jobs:
       - checkout_code
-      - docker_build:
+      - publish:
           requires:
             - checkout_code
-      - docker_publish:
-          requires:
-            - docker_build
