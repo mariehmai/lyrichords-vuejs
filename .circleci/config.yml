@@ -1,8 +1,68 @@
 version: 2
 jobs:
-  build:
+  checkout_code:
     docker:
-      - image: circleci/node:10.16-browsers
+      - image: circleci/node:10.16.3
+    working_directory: ~/lyrichords
     steps:
       - checkout
-      - run: echo "Checkout done"
+      - save_cache:
+          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
+          paths:
+            - ~/lyrichords
+  build:
+    docker:
+      - image: circleci/node:10.16.3
+    working_directory: ~/lyrichords
+    steps:
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package-lock.json" }}
+      - run:
+          name: Restoring dependencies
+          command: npm install
+      - save_cache:
+          key: dependency-cache-{{ checksum "package-lock.json" }}
+          paths:
+            - ./node_modules
+  test:
+    docker:
+      - image: circleci/node:10.16.3
+    working_directory: ~/lyrichords
+    steps:
+      - restore_cache:
+          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package-lock.json" }}
+      - run:
+          name: Restoring dependencies
+          command: npm install
+      - run:
+          name: Running test
+          command: npm run test:unit
+  publish:
+    docker:
+      - image: circleci/node:10.16.3
+    working_directory: ~/lyrichords
+    steps:
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - run:
+          name: 'Publishing in Docker Hub: mariehmai/lyrichords'
+          command: TAG=0.1.0-web-$CIRCLE_BUILD_NUM && docker build -t mariehmai/lyrichords:$TAG . && docker login -u $DOCKER_USER -p $DOCKER_PASS && docker push mariehmai/lyrichords:$TAG
+workflows:
+  version: 2
+  build_test_publish:
+    jobs:
+      - checkout_code
+      - build:
+          requires:
+            - checkout_code
+      - test:
+          requires:
+            - build
+      - publish:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master
