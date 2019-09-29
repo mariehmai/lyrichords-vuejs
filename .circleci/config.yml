@@ -26,8 +26,6 @@ jobs:
     working_directory: ~/lyrichords
     steps:
       - restore_cache:
-          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
-      - restore_cache:
           key: dependency-cache-{{ checksum "package-lock.json" }}
       - run:
           name: 'Restoring dependencies'
