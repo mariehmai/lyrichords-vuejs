@@ -1,4 +1,11 @@
-version: 2
+version: 2.1
+executors:
+  docker_publisher:
+    environment:
+      - IMAGE_NAME: mariehmai/lyrichords
+      - IMAGE_TAG: 0.1.0-web
+    docker:
+      - image: circleci/buildpack-deps:stretch
 jobs:
   checkout_code:
     docker:
@@ -39,12 +46,8 @@ jobs:
       - run:
           name: Running test
           command: npm run test:unit
-  publish:
-    environment:
-      - IMAGE_NAME: mariehmai/lyrichords
-      - IMAGE_TAG: 0.1.0-web
-    docker:
-      - image: circleci/node:10.16.3
+  docker_build:
+    executor: docker_publisher
     working_directory: ~/lyrichords
     steps:
       - restore_cache:
@@ -52,11 +55,33 @@ jobs:
       - setup_remote_docker:
           docker_layer_caching: true
       - run:
-          name: Publishing Docker Image in Docker Hub
-          command: docker build -t $IMAGE_NAME:$IMAGE_TAG-$CIRCLE_BUILD_NUM . && docker login -u $DOCKER_USER -p $DOCKER_PASS && docker push $IMAGE_NAME:$IMAGE_TAG-$CIRCLE_BUILD_NUM
+          name: Build Docker image
+          command: |
+            docker build -t $IMAGE_NAME:$IMAGE_TAG-$CIRCLE_BUILD_NUM .
+      - run:
+          name: Archive Docker image
+          command: docker save -o image.tar $IMAGE_NAME
+      - persist_to_workspace:
+          root: .
+          paths:
+            - ./image.tar
+  docker_publish:
+    executor: docker_publisher
+    steps:
+      - attach_workspace:
+          at: /tmp/workspace
+      - setup_remote_docker
+      - run:
+          name: Load archived Docker images
+          command: docker load -i /tmp/workspace/image.tar
+      - run:
+          name: Publish Docker Image to Docker Hub
+          command: |
+            docker login -u $DOCKER_USER -p $DOCKER_PASS
+            docker push $IMAGE_NAME:$IMAGE_TAG-$CIRCLE_BUILD_NUM
 workflows:
   version: 2
-  build_test_publish:
+  build_test:
     jobs:
       - checkout_code
       - build:
@@ -65,6 +90,11 @@ workflows:
       - test:
           requires:
             - build
-      - publish:
-          requires:
-            - test
+  build_publish:
+    - checkout_code
+    - docker_build:
+        requires:
+          - checkout_code
+    - docker_publish:
+        requires:
+          - docker_build
