@@ -6,10 +6,6 @@ jobs:
     working_directory: ~/lyrichords
     steps:
       - checkout
-      - save_cache:
-          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
-          paths:
-            - ~/lyrichords
   build:
     docker:
       - image: circleci/node:10.16.3
