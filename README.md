@@ -1,5 +1,7 @@
 # lyrichords
 
+[![CircleCI](https://circleci.com/gh/mariehmai/lyrichords.svg?style=svg)](https://circleci.com/gh/mariehmai/lyrichords)
+
 ## Project setup
 
 ```
