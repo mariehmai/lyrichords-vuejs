@@ -91,10 +91,11 @@ workflows:
           requires:
             - build
   build_publish:
-    - checkout_code
-    - docker_build:
-        requires:
-          - checkout_code
-    - docker_publish:
-        requires:
-          - docker_build
+    jobs:
+      - checkout_code
+      - docker_build:
+          requires:
+            - checkout_code
+      - docker_publish:
+          requires:
+            - docker_build
