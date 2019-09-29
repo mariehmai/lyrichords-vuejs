@@ -39,7 +39,7 @@ jobs:
       - run:
           name: Running test
           command: npm run test:unit
-  docker_publish:
+  publish:
     environment:
       - IMAGE_NAME: mariehmai/lyrichords
       - IMAGE_TAG: 0.1.0-web
