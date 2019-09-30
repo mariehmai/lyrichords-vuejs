@@ -23,6 +23,16 @@ module.exports = {
     quotes: [WARN, 'single'],
     'no-var': WARN,
     semi: [ERROR, 'always'],
-    'comma-dangle': [ERROR, 'never']
+    'comma-dangle': [ERROR, 'never'],
+    'vue/max-attributes-per-line': [
+      'error',
+      {
+        singleline: 3,
+        multiline: {
+          max: 2,
+          allowFirstLine: true
+        }
+      }
+    ]
   }
 };
