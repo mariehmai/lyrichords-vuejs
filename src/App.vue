@@ -1,29 +1,36 @@
 <template>
   <v-app>
     <v-app-bar app>
-      <v-toolbar-title class="headline text-uppercase">
-        <span>Vuetify</span>
-        <span class="font-weight-light">MATERIAL DESIGN</span>
-      </v-toolbar-title>
-      <v-spacer />
-      <v-btn text href="https://github.com/vuetifyjs/vuetify/releases/latest" target="_blank">
-        <span class="mr-2">Latest Release</span>
-      </v-btn>
+      <div class="text-uppercase headline logo">
+        <v-img class="image" :src="require('@/assets/logo.svg')" />
+        <span class="font-weight-light">{{ appName }}</span>
+      </div>
     </v-app-bar>
-
     <v-content>
-      <HelloWorld />
+      <router-view />
     </v-content>
   </v-app>
 </template>
 
 <script>
-import HelloWorld from '@/components/HelloWorld';
+import config from '@/config.js';
 
 export default {
   name: 'App',
-  components: {
-    HelloWorld
-  }
+  data: () => ({
+    appName: config.APP_NAME
+  })
 };
 </script>
+
+<style scoped>
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.image {
+  width: 44px;
+  margin-right: 8px;
+}
+</style>
