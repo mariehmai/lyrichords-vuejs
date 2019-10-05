@@ -5,5 +5,13 @@ module.exports = {
       sassRule.uses.clear();
       sassRule.use('null-loader').loader('null-loader');
     }
+  },
+  pluginOptions: {
+    i18n: {
+      locale: 'en',
+      fallbackLocale: 'en',
+      localeDir: 'locales',
+      enableInSFC: false
+    }
   }
 };
