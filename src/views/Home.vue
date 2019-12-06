@@ -14,9 +14,7 @@
     </div>
 
     <div class="track-container">
-      <CardViewer class="card-viewer" type="track"
-                  :children="track"
-      />
+      <CardViewer class="card-viewer" type="track" :children="track" />
     </div>
   </div>
 </template>
