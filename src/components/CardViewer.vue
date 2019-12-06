@@ -1,6 +1,6 @@
 <template>
   <v-card :elevation="4">
-    <v-card-text class="slider">
+    <v-card-text class="zoom">
       <v-slider v-model="zoom" track-color="grey"
                 min="12" max="20"
       >
