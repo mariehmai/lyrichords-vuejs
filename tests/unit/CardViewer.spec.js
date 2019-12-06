@@ -7,7 +7,7 @@ describe('CardViewer.vue', () => {
   it('renders song component when type is song', () => {
     const songMock = {
       title: 'Amazing Song',
-      author: 'Casandra Lee',
+      artist: 'Casandra Lee',
       lyrics: [{ isEndVerse: false, sentence: 'Eu sei, tudo pode acontecer' }]
     };
     const cardMock = {

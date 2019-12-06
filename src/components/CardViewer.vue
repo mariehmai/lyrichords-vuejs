@@ -3,7 +3,7 @@
     <Song
       v-if="type === 'song'"
       :title="children.title"
-      :author="children.author"
+      :artist="children.artist"
       :lyrics="children.lyrics"
     />
   </v-card>

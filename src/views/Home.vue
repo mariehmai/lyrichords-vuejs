@@ -5,6 +5,7 @@
         v-for="track in tracks"
         :key="track.id"
         class="track-card"
+        :click="() => updateSong(track.id)"
         :artist="track.artist"
         :title="track.title"
         :cover="track.cover"
@@ -30,7 +31,14 @@ export default {
     TrackCard
   },
   data: function() {
-    return { song: mocks.song, tracks: mocks.tracks };
+    return { song: mocks.tracks[0], tracks: mocks.tracks };
+  },
+  methods: {
+    updateSong(id) {
+      const songLyrics = mocks.tracks.find(track => track.id === id);
+
+      this.song = songLyrics.lyrics ? songLyrics : mocks.tracks[0];
+    }
   }
 };
 </script>

@@ -1,5 +1,8 @@
 <template>
-  <v-card class="track-card" dark>
+  <v-card class="track-card" dark
+          hover
+          @click="click"
+  >
     <v-img
       :src="randomBackground()"
       height="100px"
@@ -30,6 +33,7 @@ const backgrounds = [bg1, bg2, bg3, bg4, bg5];
 
 export default {
   props: {
+    click: { type: Function, default: () => {} },
     artist: { type: String, required: true, default: 'Unknown' },
     title: { type: String, required: true, default: 'Unknown' },
     genre: { type: String, required: true, default: 'Unknown' },
