@@ -1,22 +1,22 @@
 import { expect } from 'chai';
 import { shallowMount } from '@vue/test-utils';
 import CardViewer from '@/components/CardViewer.vue';
-// import Song from '@/components/Song.vue';
+// import Track from '@/components/Track.vue';
 
 describe('CardViewer.vue', () => {
-  it('renders song component when type is song', () => {
-    const songMock = {
+  it('renders track component when type is track', () => {
+    const trackMock = {
       title: 'Amazing Song',
-      author: 'Casandra Lee',
+      artist: 'Casandra Lee',
       lyrics: [{ isEndVerse: false, sentence: 'Eu sei, tudo pode acontecer' }]
     };
     const cardMock = {
-      type: 'song',
-      children: songMock
+      type: 'track',
+      children: trackMock
     };
     const wrapper = shallowMount(CardViewer, { propsData: { ...cardMock } });
 
-    expect(wrapper.props().type).to.equal('song');
-    // expect(wrapper.find(Song)).to.have.length(true);
+    expect(wrapper.props().type).to.equal('track');
+    // expect(wrapper.find(Track)).to.have.length(true);
   });
 });
