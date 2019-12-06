@@ -1,12 +1,9 @@
 <template>
-  <Song class="song" :title="song.title"
-        :author="song.author"
-        :lyrics="song.lyrics"
-  />
+  <CardViewer type="song" :children="song" />
 </template>
 
 <script>
-import Song from '@/components/Song';
+import CardViewer from '@/components/CardViewer';
 
 const song = {
   title: 'Eu Sei',
@@ -45,16 +42,10 @@ const song = {
 
 export default {
   components: {
-    Song
+    CardViewer
   },
   data: function() {
     return { song };
   }
 };
 </script>
-
-<style scoped>
-.song {
-  padding: 4vh 3vh;
-}
-</style>
