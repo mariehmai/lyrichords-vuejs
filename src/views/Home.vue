@@ -1,20 +1,20 @@
 <template>
   <div id="home">
-    <div class="track-container">
+    <div class="track-card-container">
       <TrackCard
-        v-for="track in tracks"
-        :key="track.id"
+        v-for="t in tracks"
+        :key="t.id"
         class="track-card"
-        :click="() => updateSong(track.id)"
-        :artist="track.artist"
-        :title="track.title"
-        :cover="track.cover"
-        :genre="track.genre"
+        :click="() => updateTrack(t.id)"
+        :artist="t.artist"
+        :title="t.title"
+        :cover="t.cover"
+        :genre="t.genre"
       />
     </div>
 
-    <div class="song-container">
-      <CardViewer class="card-viewer" type="song" :children="song" />
+    <div class="track-container">
+      <CardViewer class="card-viewer" type="track" :children="track" />
     </div>
   </div>
 </template>
@@ -31,13 +31,13 @@ export default {
     TrackCard
   },
   data: function() {
-    return { song: mocks.tracks[0], tracks: mocks.tracks };
+    return { track: mocks.tracks[0], tracks: mocks.tracks };
   },
   methods: {
-    updateSong(id) {
-      const songLyrics = mocks.tracks.find(track => track.id === id);
+    updateTrack(id) {
+      const trackLyrics = mocks.tracks.find(track => track.id === id);
 
-      this.song = songLyrics.lyrics ? songLyrics : mocks.tracks[0];
+      this.track = trackLyrics.lyrics ? trackLyrics : mocks.tracks[0];
     }
   }
 };
@@ -50,11 +50,11 @@ export default {
   justify-content: space-between;
 }
 
-.track-container {
+.track-card-container {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  flex: 1;
+  flex: 2;
   justify-content: center;
   padding: 2vh 0.5vh;
 }
@@ -63,8 +63,8 @@ export default {
   margin: 0.5vh 1vh;
 }
 
-.song-container {
-  flex: 2;
+.track-container {
+  flex: 3;
   padding: 1.5vh;
 }
 

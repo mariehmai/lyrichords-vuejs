@@ -1,7 +1,7 @@
 <template>
   <v-card :elevation="4">
-    <Song
-      v-if="type === 'song'"
+    <Track
+      v-if="type === 'track'"
       :title="children.title"
       :artist="children.artist"
       :lyrics="children.lyrics"
@@ -10,11 +10,11 @@
 </template>
 
 <script>
-import Song from '@/components/Song';
+import Track from '@/components/Track';
 
 export default {
   components: {
-    Song
+    Track
   },
   props: {
     type: { type: String, default: '' },

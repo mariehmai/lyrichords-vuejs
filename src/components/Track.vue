@@ -1,11 +1,11 @@
 <template>
-  <div class="song-container">
+  <div class="track-container">
     <v-card-title>{{ artist }} - {{ title }}</v-card-title>
     <v-card-text>
       <span v-for="(next, i) in lyrics" :key="i">
         {{ next.sentence }}
-        <br />
-        <br v-if="next.isEndVerse" />
+        <br>
+        <br v-if="next.isEndVerse">
       </span>
     </v-card-text>
   </div>
