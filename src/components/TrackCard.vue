@@ -14,7 +14,9 @@
           <v-card-title v-text="title" />
           <v-card-text v-text="artist" />
         </div>
-        <v-avatar class="ma-3" size="70" tile>
+        <v-avatar class="ma-3" size="70"
+                  tile
+        >
           <v-img :src="cover" gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)" />
         </v-avatar>
       </div>
