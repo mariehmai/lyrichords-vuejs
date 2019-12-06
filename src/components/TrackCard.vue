@@ -2,11 +2,11 @@
   <v-card class="track-card" :color="randomColor()" dark>
     <div class="d-flex justify-space-between">
       <div>
-        <v-card-title v-text="title"></v-card-title>
-        <v-card-text v-text="artist"></v-card-text>
+        <v-card-title v-text="title" />
+        <v-card-text v-text="artist" />
       </div>
       <v-avatar class="ma-3" size="70" tile>
-        <v-img :src="cover"></v-img>
+        <v-img :src="cover" />
       </v-avatar>
     </div>
   </v-card>
