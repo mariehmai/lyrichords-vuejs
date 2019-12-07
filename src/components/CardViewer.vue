@@ -1,12 +1,19 @@
 <template>
   <v-card :elevation="4">
     <v-card-text class="zoom">
-      <v-slider v-model="zoom" track-color="grey" min="12" max="20">
+      <v-slider v-model="zoom" track-color="grey"
+                min="12"
+                max="20"
+      >
         <template v-slot:prepend>
-          <v-icon @click="decrement">mdi-magnify-minus-outline</v-icon>
+          <v-icon @click="decrement">
+            mdi-magnify-minus-outline
+          </v-icon>
         </template>
         <template v-slot:append>
-          <v-icon @click="increment">mdi-magnify-plus-outline</v-icon>
+          <v-icon @click="increment">
+            mdi-magnify-plus-outline
+          </v-icon>
         </template>
       </v-slider>
     </v-card-text>

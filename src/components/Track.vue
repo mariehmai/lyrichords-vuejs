@@ -1,12 +1,17 @@
 <template>
   <div class="track-container">
     <div class="metadata">
-      <v-avatar v-if="!!cover" class="ma-3" size="100" tile>
+      <v-avatar v-if="!!cover" class="ma-3"
+                size="100"
+                tile
+      >
         <v-img :src="cover" gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)" />
       </v-avatar>
       <div>
         <v-card-title>{{ artist }} - {{ title }}</v-card-title>
-        <v-card-text v-if="!!genre">{{ $t('genre') }}: {{ genre }}</v-card-text>
+        <v-card-text v-if="!!genre">
+          {{ $t('genre') }}: {{ genre }}
+        </v-card-text>
       </div>
     </div>
     <v-divider />

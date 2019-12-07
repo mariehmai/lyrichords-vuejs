@@ -1,5 +1,8 @@
 <template>
-  <v-card class="track-card" dark hover @click="click">
+  <v-card class="track-card" dark
+          hover
+          @click="click"
+  >
     <v-img
       class="background"
       :src="randomBackground()"
