@@ -2,7 +2,8 @@
   <v-card :elevation="4">
     <v-card-text class="zoom">
       <v-slider v-model="zoom" track-color="grey"
-                min="12" max="20"
+                min="12"
+                max="20"
       >
         <template v-slot:prepend>
           <v-icon @click="decrement">
@@ -62,5 +63,17 @@ export default {
 <style scoped>
 .zoom {
   width: 30%;
+}
+
+@media screen and (max-width: 850px) {
+  .zoom {
+    width: 50%;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .zoom {
+    width: 100%;
+  }
 }
 </style>

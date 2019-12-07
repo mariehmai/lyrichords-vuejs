@@ -4,19 +4,17 @@
           @click="click"
   >
     <v-img
+      class="background"
       :src="randomBackground()"
-      height="100px"
       aspect-ratio="1"
       gradient="to right, rgba(0,0,0,.1), rgba(0,0,0,1)"
     >
       <div class="d-flex justify-space-between">
         <div>
-          <v-card-title v-text="title" />
+          <v-card-title class="title" v-text="title" />
           <v-card-text v-text="artist" />
         </div>
-        <v-avatar class="ma-3" size="70"
-                  tile
-        >
+        <v-avatar class="ma-3 cover" size="65" tile>
           <v-img :src="cover" gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)" />
         </v-avatar>
       </div>
@@ -48,3 +46,15 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.background {
+  height: 94px;
+}
+
+@media screen and (max-width: 850px) {
+  .cover {
+    display: none;
+  }
+}
+</style>>

@@ -14,9 +14,7 @@
     </div>
 
     <div class="track-container">
-      <CardViewer class="card-viewer" type="track"
-                  :children="track"
-      />
+      <CardViewer class="card-viewer" type="track" :children="track" />
     </div>
   </div>
 </template>
@@ -72,6 +70,12 @@ export default {
 
 .card-viewer {
   margin: 1vh 0.5vh;
+}
+
+@media screen and (max-width: 550px) {
+  #home {
+    flex-direction: column;
+  }
 }
 </style>
 

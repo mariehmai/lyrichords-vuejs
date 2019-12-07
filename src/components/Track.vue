@@ -2,7 +2,8 @@
   <div class="track-container">
     <div class="metadata">
       <v-avatar v-if="!!cover" class="ma-3"
-                size="100" tile
+                size="100"
+                tile
       >
         <v-img :src="cover" gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)" />
       </v-avatar>
@@ -40,5 +41,11 @@ export default {
 .metadata {
   display: flex;
   flex-direction: row;
+}
+
+@media screen and (max-width: 550px) {
+  .metadata {
+    flex-direction: column;
+  }
 }
 </style>
