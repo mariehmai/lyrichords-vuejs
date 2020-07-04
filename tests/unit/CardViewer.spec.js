@@ -8,7 +8,7 @@ describe('CardViewer.vue', () => {
     const trackMock = {
       title: 'Amazing Song',
       artist: 'Casandra Lee',
-      lyrics: [{ isEndVerse: false, sentence: 'Eu sei, tudo pode acontecer' }]
+      lyrics: 'Eu sei, tudo pode acontecer'
     };
     const cardMock = {
       type: 'track',

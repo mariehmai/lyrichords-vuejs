@@ -7,14 +7,14 @@
       class="background"
       :src="randomBackground()"
       aspect-ratio="1"
-      gradient="to right, rgba(0,0,0,.1), rgba(0,0,0,1)"
+      gradient="to right, rgba(0,0,0,0.9), rgba(0,0,0,0.1)"
     >
       <div class="d-flex justify-space-between">
         <div>
-          <v-card-title class="title" v-text="title" />
-          <v-card-text v-text="artist" />
+          <v-card-title class="title text-h6" v-text="title" />
+          <v-card-text class="description text-md-overline" v-text="artist" />
         </div>
-        <v-avatar class="ma-3 cover" size="65" tile>
+        <v-avatar class="ma-3 cover" size="60" tile>
           <v-img :src="cover" gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)" />
         </v-avatar>
       </div>
@@ -49,7 +49,15 @@ export default {
 
 <style scoped>
 .background {
-  height: 94px;
+  height: 85px;
+}
+
+.title {
+  padding: 5px 16px 10px 16px;
+}
+
+.description {
+  padding: 5px 16px 10px 16px;
 }
 
 @media screen and (max-width: 850px) {

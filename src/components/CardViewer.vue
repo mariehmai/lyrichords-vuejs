@@ -1,5 +1,5 @@
 <template>
-  <v-card :elevation="4">
+  <v-card :elevation="2">
     <v-card-text class="zoom">
       <v-slider v-model="zoom" track-color="grey"
                 min="12"
@@ -62,13 +62,7 @@ export default {
 
 <style scoped>
 .zoom {
-  width: 30%;
-}
-
-@media screen and (max-width: 850px) {
-  .zoom {
-    width: 50%;
-  }
+  width: 50%;
 }
 
 @media screen and (max-width: 550px) {

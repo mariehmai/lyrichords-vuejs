@@ -55,7 +55,7 @@ export default {
   flex-direction: column;
   flex-wrap: wrap;
   flex: 2;
-  justify-content: center;
+  justify-content: flex-start;
   padding: 2vh 0.5vh;
 }
 
@@ -64,6 +64,7 @@ export default {
 }
 
 .track-container {
+  min-width: 500px;
   flex: 3;
   padding: 1.5vh;
 }

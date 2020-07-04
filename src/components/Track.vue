@@ -16,10 +16,9 @@
     </div>
     <v-divider />
     <v-card-text>
-      <span v-for="(next, i) in lyrics" :key="i">
-        <p v-if="next.isEndVerse" :style="customStyle">{{ next.sentence }}</p>
-        <div v-else :style="customStyle">{{ next.sentence }}</div>
-      </span>
+      <pre class="content" :style="customStyle">
+      {{ decodeURI(lyrics) }}
+      </pre>
     </v-card-text>
   </div>
 </template>
@@ -32,7 +31,7 @@ export default {
     artist: { type: String, required: true },
     genre: { type: String, default: '' },
     cover: { type: String, default: '' },
-    lyrics: { type: Array, required: true }
+    lyrics: { type: String, required: true }
   }
 };
 </script>
@@ -47,5 +46,9 @@ export default {
   .metadata {
     flex-direction: column;
   }
+}
+
+.content {
+  overflow: scroll;
 }
 </style>
