@@ -1,6 +1,7 @@
 <template>
   <div id="home">
     <div class="track-card-container">
+      <AddSongForm />
       <TrackCard
         v-for="t in tracks"
         :key="t.id"
@@ -12,7 +13,6 @@
         :genre="t.genre"
       />
     </div>
-
     <div class="track-container">
       <CardViewer class="card-viewer" type="track" :children="track" />
     </div>
@@ -20,6 +20,7 @@
 </template>
 
 <script>
+import AddSongForm from '@/components/AddSongForm';
 import CardViewer from '@/components/CardViewer';
 import TrackCard from '@/components/TrackCard';
 
@@ -28,16 +29,20 @@ import mocks from '@/mocks';
 export default {
   components: {
     CardViewer,
-    TrackCard
+    TrackCard,
+    AddSongForm
   },
-  data: function() {
-    return { track: mocks.tracks[0], tracks: mocks.tracks };
+  data() {
+    return {
+      track: mocks.tracks[0],
+      tracks: mocks.tracks
+    };
   },
   methods: {
     updateTrack(id) {
-      const trackLyrics = mocks.tracks.find(track => track.id === id);
+      const trackLyrics = mocks.tracks.find((track) => track.id === id);
 
-      this.track = trackLyrics.lyrics ? trackLyrics : mocks.tracks[0];
+      this.track = trackLyrics;
     }
   }
 };
@@ -79,4 +84,3 @@ export default {
   }
 }
 </style>
-

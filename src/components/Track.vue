@@ -27,11 +27,11 @@
 export default {
   props: {
     customStyle: { type: Object, default: () => ({ fontSize: '20px' }) },
-    title: { type: String, required: true },
-    artist: { type: String, required: true },
+    title: { type: String, default: 'Unknown' },
+    artist: { type: String, default: 'Unknown' },
     genre: { type: String, default: '' },
     cover: { type: String, default: '' },
-    lyrics: { type: String, required: true }
+    lyrics: { type: String, default: 'No lyrics found' }
   }
 };
 </script>
