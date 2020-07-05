@@ -6,14 +6,19 @@ export const Action = {
 };
 
 export const Mutation = {
+  SET_SELECTED_TRACK: 'SET_SELECTED_TRACK',
   SET_TRACKS: 'SET_TRACKS'
 };
 
 export default {
   state: {
-    tracks: []
+    tracks: [],
+    selectedTrack: {}
   },
   mutations: {
+    async [Mutation.SET_SELECTED_TRACK](state, payload) {
+      state.selectedTrack = payload;
+    },
     async [Mutation.SET_TRACKS](state, payload) {
       state.tracks = payload;
     }
