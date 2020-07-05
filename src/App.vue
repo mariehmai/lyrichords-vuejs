@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import { Action } from '@/store/auth/types';
+import { Action } from '@/store/auth.store';
 
 export default {
   name: 'App',

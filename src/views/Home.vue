@@ -1,12 +1,12 @@
 <template>
   <div id="home">
     <div class="track-card-container">
-      <AddSongForm />
+      <CreateTrackForm />
       <TrackCard
         v-for="t in tracks"
         :key="t.id"
         class="track-card"
-        :click="() => updateTrack(t.id)"
+        :click="() => updateSelectedTrack(t.id)"
         :artist="t.artist"
         :title="t.title"
         :cover="t.cover"
@@ -20,29 +20,40 @@
 </template>
 
 <script>
-import AddSongForm from '@/components/AddSongForm';
+import { mapState } from 'vuex';
+
+import { Action } from '@/store/track.store';
+
+import CreateTrackForm from '@/components/CreateTrackForm';
 import CardViewer from '@/components/CardViewer';
 import TrackCard from '@/components/TrackCard';
-
-import mocks from '@/mocks';
 
 export default {
   components: {
     CardViewer,
     TrackCard,
-    AddSongForm
+    CreateTrackForm
   },
   data() {
+    this.$store.dispatch(Action.FETCH_TRACKS);
+
     return {
-      track: mocks.tracks[0],
-      tracks: mocks.tracks
+      track: {}
     };
   },
+  computed: {
+    ...mapState({
+      tracks: state => state.Track.tracks
+    })
+  },
+  updated() {
+    if (this.tracks.length && !this.track.title) {
+      this.track = this.tracks[0];
+    }
+  },
   methods: {
-    updateTrack(id) {
-      const trackLyrics = mocks.tracks.find((track) => track.id === id);
-
-      this.track = trackLyrics;
+    updateSelectedTrack(id) {
+      this.track = this.tracks.find((track) => track.id === id);
     }
   }
 };
@@ -66,6 +77,7 @@ export default {
 
 .track-card {
   margin: 0.5vh 1vh;
+  background-color: red;
 }
 
 .track-container {

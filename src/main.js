@@ -6,7 +6,7 @@ import store from '@/store';
 import { auth } from '@/plugins/firebase';
 import i18n from '@/plugins/i18n';
 import vuetify from '@/plugins/vuetify';
-import { Action } from '@/store/auth/types';
+import { Action } from '@/store/auth.store';
 
 Vue.config.productionTip = false;
 

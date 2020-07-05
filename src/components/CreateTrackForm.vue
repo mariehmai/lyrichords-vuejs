@@ -1,18 +1,18 @@
 <template>
-  <v-form @submit.prevent="addSong">
+  <v-form @submit.prevent="createTrack">
     <v-container>
       <v-text-field
-        v-model="song.title"
+        v-model="title"
         label="Song title"
         placeholder="Colchique dans les prés"
       />
       <v-text-field
-        v-model="song.artist"
+        v-model="artist"
         label="Artist"
         placeholder="Casandra Lee"
       />
       <v-textarea
-        v-model="song.lyrics"
+        v-model="lyrics"
         name="input-7-1"
         label="Lyrics"
         placeholder="🎼Lala la la la lala 🎤"
@@ -28,27 +28,25 @@
 </template>
 
 <script>
-import mocks from '@/mocks';
+import { Action } from '@/store/track.store';
 
 export default {
-  props: {
-    click: { type: Function, default: () => {} }
-  },
   data() {
     return {
-      song: {
-        type: Object,
-        default: {
-          title: { type: String, default: '' },
-          artist: { type: String, default: '' },
-          lyrics: { type: String, default: '' }
-        }
-      }
+      artist: '',
+      genre: 'Unknown',
+      lyrics: '' ,
+      title: ''
     };
   },
   methods: {
-    addSong() {
-      mocks.tracks.push(this.song);
+    createTrack() {
+      this.$store.dispatch(Action.CREATE_TRACK, {
+        artist: this.artist,
+        genre: this.genre,
+        lyrics: this.lyrics,
+        title: this.title
+      });
     }
   }
 };
