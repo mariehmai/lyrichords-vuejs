@@ -1,11 +1,12 @@
 import Vue from 'vue';
 import App from './App.vue';
 import router from './router';
-import store from './store';
+import store from '@/store';
 
 import { auth } from '@/plugins/firebase';
 import i18n from '@/plugins/i18n';
 import vuetify from '@/plugins/vuetify';
+import { Action } from '@/store/auth/types';
 
 Vue.config.productionTip = false;
 
@@ -24,6 +25,6 @@ auth.onAuthStateChanged(user => {
   }
   
   if (user) {
-    store.dispatch('fetchUserProfile', user);
+    store.dispatch(Action.FETCH_ME, user);
   }
 });

@@ -16,6 +16,8 @@
 </template>
 
 <script>
+import { Action } from '@/store/auth/types';
+
 export default {
   name: 'App',
   data: () => ({
@@ -23,7 +25,7 @@ export default {
   }),
   methods: {
     logout() {
-      this.$store.dispatch('logout');
+      this.$store.dispatch(Action.LOGOUT);
     }
   }
 };

@@ -27,6 +27,8 @@
 </template>
 
 <script>
+import { Action } from '@/store/auth/types';
+
 export default {
   data() {
     return {
@@ -36,7 +38,7 @@ export default {
   },
   methods: {
     login() {
-      this.$store.dispatch('login', {
+      this.$store.dispatch(Action.LOGIN, {
         email: this.email,
         password: this.password
       });
