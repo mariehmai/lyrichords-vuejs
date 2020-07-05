@@ -43,7 +43,10 @@ export default {
       await firebase.auth.signOut();
   
       commit(Mutation.SET_ME, {});
-      router.push('/login');
+
+      if (router.currentRoute.path !== '/login') {
+        router.push('/login');
+      }
     },
     async [Action.REGISTER]({ dispatch }, { email, password, name }) {
       const { user } = await firebase.auth.createUserWithEmailAndPassword(email, password);
