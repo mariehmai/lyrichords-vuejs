@@ -16,5 +16,13 @@ Vue.use(Vuetify);
 export default new Vuetify({
   icons: {
     iconfont: 'faSvg'
+  },
+  theme: {
+    themes: {
+      light: {
+        primary: '#f7797d',
+        secondary: '#f7797d'
+      }
+    }
   }
 });

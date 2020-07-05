@@ -1,19 +1,33 @@
 <template>
   <div id="home">
     <div>
+      <v-img gradient="to bottom right, rgb(251,215,124,.2), rgb(251,215,124,1), #f7797d">
+        <v-container>
+          <v-text-field v-model="search"
+                        outlined
+                        label="Search 🔎"
+                        placeholder="Song title, artist, ..."
+          />
+          <v-card v-if="filteredTracks.length" three-line class="track-list">
+            <TrackItem
+              v-for="t in filteredTracks"
+              :key="t.id"
+              class="track-item"
+              :click="() => updateSelectedTrack(t.id)"
+              :artist="t.artist"
+              :title="t.title"
+              :cover="t.cover"
+              :genre="t.genre"
+            />
+          </v-card>
+          <v-card v-else class="track-list">
+            <v-list-item class="track-item">
+              No results
+            </v-list-item>
+          </v-card>
+        </v-container>
+      </v-img>
       <CreateTrackForm />
-      <v-list three-line class="track-list">
-        <TrackItem
-          v-for="t in tracks"
-          :key="t.id"
-          class="track-item"
-          :click="() => updateSelectedTrack(t.id)"
-          :artist="t.artist"
-          :title="t.title"
-          :cover="t.cover"
-          :genre="t.genre"
-        />
-      </v-list>
     </div>
     <div class="track-viewer-container">
       <TrackViewer class="track-viewer" type="track" :children="track" />
@@ -40,13 +54,20 @@ export default {
     this.$store.dispatch(Action.FETCH_TRACKS);
 
     return {
+      search: '',
       track: {}
     };
   },
   computed: {
     ...mapState({
       tracks: state => state.Track.tracks
-    })
+    }),
+    filteredTracks() {
+      return this.tracks.filter(track => 
+        track.title.toLowerCase().includes(this.search.toLowerCase()) ||
+        track.artist.toLowerCase().includes(this.search.toLowerCase())
+      );
+    }
   },
   updated() {
     if (this.tracks.length && !this.track.title) {
@@ -68,6 +89,12 @@ export default {
   justify-content: space-between;
 }
 
+@media screen and (max-width: 550px) {
+  #home {
+    flex-direction: column;
+  }
+}
+
 .track-list {
   display: flex;
   flex-direction: column;
@@ -87,21 +114,15 @@ export default {
 
 .track-item {
   margin: 0.5vh 1vh;
+  min-width: 350px;
 }
 
 .track-viewer-container {
-  min-width: 500px;
   flex: 3;
   padding: 1.5vh;
 }
 
 .track-viewer {
   margin: 1vh 0.5vh;
-}
-
-@media screen and (max-width: 550px) {
-  #home {
-    flex-direction: column;
-  }
 }
 </style>

@@ -32,8 +32,10 @@ export default {
       dispatch(Action.FETCH_TRACKS);
     },
     async [Action.FETCH_TRACKS]({ commit }) {
-      const tracksDocs = await firebase.tracksCollection.get();
-  
+      const tracksDocs = await firebase.tracksCollection
+        .orderBy('title', 'asc')
+        .get();
+      
       const tracks = tracksDocs.docs.map(track => ({
         ...track.data(),
         id: track.id

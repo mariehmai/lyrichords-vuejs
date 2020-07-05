@@ -5,7 +5,7 @@
                 size="100"
                 tile
       >
-        <v-img :src="cover" gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)" />
+        <v-img :src="cover" />
       </v-avatar>
       <div>
         <v-card-title>{{ artist }} - {{ title }}</v-card-title>
