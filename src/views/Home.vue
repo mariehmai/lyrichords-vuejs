@@ -2,21 +2,21 @@
   <div id="home">
     <div>
       <CreateTrackForm />
-      <div class="track-card-container">
-        <TrackCard
+      <v-list three-line class="track-list">
+        <TrackItem
           v-for="t in tracks"
           :key="t.id"
-          class="track-card"
+          class="track-item"
           :click="() => updateSelectedTrack(t.id)"
           :artist="t.artist"
           :title="t.title"
           :cover="t.cover"
           :genre="t.genre"
         />
-      </div>
+      </v-list>
     </div>
-    <div class="track-container">
-      <CardViewer class="card-viewer" type="track" :children="track" />
+    <div class="track-viewer-container">
+      <TrackViewer class="track-viewer" type="track" :children="track" />
     </div>
   </div>
 </template>
@@ -27,13 +27,13 @@ import { mapState } from 'vuex';
 import { Action } from '@/store/track.store';
 
 import CreateTrackForm from '@/components/CreateTrackForm';
-import CardViewer from '@/components/CardViewer';
-import TrackCard from '@/components/TrackCard';
+import TrackViewer from '@/components/TrackViewer';
+import TrackItem from '@/components/TrackItem';
 
 export default {
   components: {
-    CardViewer,
-    TrackCard,
+    TrackViewer,
+    TrackItem,
     CreateTrackForm
   },
   data() {
@@ -68,7 +68,7 @@ export default {
   justify-content: space-between;
 }
 
-.track-card-container {
+.track-list {
   display: flex;
   flex-direction: column;
   flex: 2;
@@ -79,23 +79,23 @@ export default {
 }
 
 @media screen and (max-width: 500px) {
-  .track-card-container {
+  .track-list {
     max-height: 250px;
     flex-wrap: wrap;
   }
 }
 
-.track-card {
+.track-item {
   margin: 0.5vh 1vh;
 }
 
-.track-container {
+.track-viewer-container {
   min-width: 500px;
   flex: 3;
   padding: 1.5vh;
 }
 
-.card-viewer {
+.track-viewer {
   margin: 1vh 0.5vh;
 }
 

@@ -1,9 +1,9 @@
 import { expect } from 'chai';
 import { shallowMount } from '@vue/test-utils';
-import CardViewer from '@/components/CardViewer.vue';
+import TrackViewer from '@/components/TrackViewer.vue';
 // import Track from '@/components/Track.vue';
 
-describe('CardViewer.vue', () => {
+describe('TrackViewer.vue', () => {
   it('renders track component when type is track', () => {
     const trackMock = {
       title: 'Amazing Song',
@@ -14,7 +14,7 @@ describe('CardViewer.vue', () => {
       type: 'track',
       children: trackMock
     };
-    const wrapper = shallowMount(CardViewer, { propsData: { ...cardMock } });
+    const wrapper = shallowMount(TrackViewer, { propsData: { ...cardMock } });
 
     expect(wrapper.props().type).to.equal('track');
     // expect(wrapper.find(Track)).to.have.length(true);
