@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "core-js": "^3.6.5",
+    "firebase": "^7.15.5",
     "node-sass": "^4.14.1",
     "vue": "^2.6.11",
     "vue-i18n": "^8.18.2",
@@ -19,7 +20,9 @@
     "vuex": "^3.5.1"
   },
   "devDependencies": {
-    "@mdi/font": "^5.3.45",
+    "@fortawesome/fontawesome-svg-core": "^1.2.29",
+    "@fortawesome/free-solid-svg-icons": "^5.13.1",
+    "@fortawesome/vue-fontawesome": "^0.1.10",
     "@vue/cli-plugin-babel": "^4.4.6",
     "@vue/cli-plugin-eslint": "^4.4.6",
     "@vue/cli-plugin-unit-mocha": "^4.4.6",

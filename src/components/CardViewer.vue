@@ -1,19 +1,19 @@
 <template>
   <v-card :elevation="2">
     <v-card-text class="zoom">
-      <v-slider v-model="zoom" track-color="grey"
+      <v-slider v-model="zoom"
                 min="12"
                 max="20"
       >
         <template v-slot:prepend>
-          <v-icon @click="decrement">
-            mdi-magnify-minus-outline
-          </v-icon>
+          <v-btn icon @click="decrement">
+            <font-awesome-icon :icon="['fa', 'search-minus']" />
+          </v-btn>
         </template>
         <template v-slot:append>
-          <v-icon @click="increment">
-            mdi-magnify-plus-outline
-          </v-icon>
+          <v-btn icon @click="increment">
+            <font-awesome-icon :icon="['fa', 'search-plus']" />
+          </v-btn>
         </template>
       </v-slider>
     </v-card-text>
