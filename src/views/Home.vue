@@ -1,17 +1,19 @@
 <template>
   <div id="home">
-    <div class="track-card-container">
+    <div>
       <CreateTrackForm />
-      <TrackCard
-        v-for="t in tracks"
-        :key="t.id"
-        class="track-card"
-        :click="() => updateSelectedTrack(t.id)"
-        :artist="t.artist"
-        :title="t.title"
-        :cover="t.cover"
-        :genre="t.genre"
-      />
+      <div class="track-card-container">
+        <TrackCard
+          v-for="t in tracks"
+          :key="t.id"
+          class="track-card"
+          :click="() => updateSelectedTrack(t.id)"
+          :artist="t.artist"
+          :title="t.title"
+          :cover="t.cover"
+          :genre="t.genre"
+        />
+      </div>
     </div>
     <div class="track-container">
       <CardViewer class="card-viewer" type="track" :children="track" />
@@ -69,15 +71,22 @@ export default {
 .track-card-container {
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
   flex: 2;
   justify-content: flex-start;
   padding: 2vh 0.5vh;
+  max-height: 400px;
+  overflow: scroll;
+}
+
+@media screen and (max-width: 500px) {
+  .track-card-container {
+    max-height: 250px;
+    flex-wrap: wrap;
+  }
 }
 
 .track-card {
   margin: 0.5vh 1vh;
-  background-color: red;
 }
 
 .track-container {
