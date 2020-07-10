@@ -7,16 +7,17 @@
                     placeholder="Song title, artist, ..."
       />
       <v-card v-if="filteredTracks.length" three-line class="track-list">
-        <TrackItem
-          v-for="t in filteredTracks"
-          :key="t.id"
-          class="track-item"
-          :click="() => updateSelectedTrack(t.id)"
-          :artist="t.artist"
-          :title="t.title"
-          :cover="t.cover"
-          :genre="t.genre"
-        />
+        <div v-for="t in filteredTracks" :key="t.id">
+          <TrackItem
+            class="track-item"
+            :click="() => updateSelectedTrack(t.id)"
+            :artist="t.artist"
+            :title="t.title"
+            :cover="t.cover"
+            :genre="t.genre"
+          />
+          <v-divider />
+        </div>
       </v-card>
       <v-card v-else class="track-list">
         <v-list-item class="track-item">
@@ -77,7 +78,7 @@ export default {
   flex-direction: column;
   flex: 2;
   justify-content: flex-start;
-  padding: 2vh 0.5vh;
+  padding: 1vh;
   max-height: 400px;
   overflow: scroll;
 }
@@ -90,7 +91,6 @@ export default {
 }
 
 .track-item {
-  margin: 0.5vh 1vh;
   min-width: 350px;
 }
 </style>
