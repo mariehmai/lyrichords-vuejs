@@ -85,7 +85,7 @@ export default {
 
 @media screen and (max-width: 500px) {
   .track-list {
-    max-height: 250px;
+    max-height: 190px;
     flex-wrap: wrap;
   }
 }
