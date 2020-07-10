@@ -1,5 +1,5 @@
 <template>
-  <v-list-item class="track-card"
+  <v-list-item class="track-item"
                hover
                @click="click"
   >
