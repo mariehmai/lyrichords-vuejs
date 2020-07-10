@@ -18,7 +18,6 @@
       <v-btn color="secondary"
              type="submit"
              block
-             rounded
       >
         Log in
       </v-btn>
