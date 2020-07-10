@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar app>
+  <v-app-bar app dense>
     <div class="text-uppercase headline logo">
       <v-img class="image" :src="require('@/assets/logo.svg')" />
       <span class="font-weight-light">{{ appName }}</span>
