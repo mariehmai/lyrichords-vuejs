@@ -63,6 +63,7 @@ export default {
 <style scoped>
 .zoom {
   width: 50%;
+  padding-bottom: 0;
 }
 
 @media screen and (max-width: 550px) {
