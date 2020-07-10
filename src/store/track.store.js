@@ -1,5 +1,11 @@
 import * as firebase from '@/plugins/firebase';
 
+export const toTitleCase = str => str
+  .toLowerCase()
+  .split(' ')
+  .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+  .join(' ');
+
 export const Action = {
   CREATE_TRACK: 'CREATE_TRACK',
   FETCH_TRACKS: 'FETCH_TRACKS'
@@ -27,7 +33,7 @@ export default {
     async [Action.CREATE_TRACK]({ dispatch }, track) {
       await firebase.tracksCollection.add({
         userId: firebase.auth.currentUser.uid,
-        title: track.title,
+        title: toTitleCase(track.title),
         artist: track.artist,
         genre: track.genre,
         lyrics: encodeURI(track.lyrics),
