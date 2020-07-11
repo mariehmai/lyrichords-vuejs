@@ -1,11 +1,6 @@
 <template>
   <v-img gradient="to bottom right, rgb(251,215,124,.2), rgb(251,215,124,1), #f7797d">
     <v-container>
-      <v-text-field v-model="search"
-                    outlined
-                    label="Search 🔎"
-                    placeholder="Song title, artist, ..."
-      />
       <v-card v-if="filteredTracks.length" three-line class="track-list">
         <div v-for="t in filteredTracks" :key="t.id">
           <TrackItem
@@ -39,15 +34,9 @@ export default {
   components: {
     TrackItem
   },
-  data() {
-    this.$store.dispatch(Action.FETCH_TRACKS);
-
-    return {
-      search: ''
-    };
-  },
   computed: {
     ...mapState({
+      search: state => state.Track.search,
       selectedTrack: state => state.Track.selectedTrack,
       tracks: state => state.Track.tracks
     }),
@@ -57,6 +46,9 @@ export default {
         track.artist.toLowerCase().includes(this.search.toLowerCase())
       );
     }
+  },
+  mounted() {
+    this.$store.dispatch(Action.FETCH_TRACKS);
   },
   updated() {
     if (this.tracks.length && !this.selectedTrack.title) {
@@ -68,7 +60,7 @@ export default {
       const selectedTrack = this.tracks.find((track) => track.id === id);
       this.$store.commit(Mutation.SET_SELECTED_TRACK, selectedTrack);
     }
-  }  
+  }
 };
 </script>
 

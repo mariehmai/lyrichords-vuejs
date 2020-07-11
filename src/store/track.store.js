@@ -13,11 +13,13 @@ export const Action = {
 
 export const Mutation = {
   SET_SELECTED_TRACK: 'SET_SELECTED_TRACK',
-  SET_TRACKS: 'SET_TRACKS'
+  SET_TRACKS: 'SET_TRACKS',
+  UPDATE_SEARCH: 'UPDATE_SEARCH'
 };
 
 export default {
   state: {
+    search: '',
     tracks: [],
     selectedTrack: {}
   },
@@ -27,6 +29,9 @@ export default {
     },
     async [Mutation.SET_TRACKS](state, payload) {
       state.tracks = payload;
+    },
+    async [Mutation.UPDATE_SEARCH](state, payload) {
+      state.search = payload;
     }
   },
   actions: {
@@ -43,11 +48,11 @@ export default {
       dispatch(Action.FETCH_TRACKS);
     },
     async [Action.FETCH_TRACKS]({ commit }) {
-      const tracksDocs = await firebase.tracksCollection
+      const trackDocs = await firebase.tracksCollection
         .orderBy('title', 'asc')
         .get();
       
-      const tracks = tracksDocs.docs.map(track => ({
+      const tracks = trackDocs.docs.map(track => ({
         ...track.data(),
         id: track.id
       }));

@@ -1,7 +1,7 @@
 <template>
   <div id="home">
     <div>
-      <SearchTrackList />
+      <TrackList />
       <v-expansion-panels v-model="panel" multiple flat>
         <v-expansion-panel>
           <v-expansion-panel-header class="panel-header">
@@ -28,13 +28,13 @@
 import { mapState } from 'vuex';
 
 import CreateTrackForm from '@/components/CreateTrackForm';
-import SearchTrackList from '@/components/SearchTrackList';
+import TrackList from '@/components/TrackList';
 import TrackViewer from '@/components/TrackViewer';
 
 export default {
   components: {
     CreateTrackForm,
-    SearchTrackList,
+    TrackList,
     TrackViewer
   },
   data() {
