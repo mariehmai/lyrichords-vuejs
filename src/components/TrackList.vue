@@ -23,6 +23,24 @@
           No results
         </v-list-item>
       </v-card>
+
+      <v-expansion-panels multiple flat class="panels">
+        <v-expansion-panel>
+          <v-card>
+            <v-expansion-panel-header class="panel-header">
+              <h4 class="text">
+                Add a song
+              </h4>
+              <template v-slot:actions>
+                <font-awesome-icon :icon="['fa', 'plus']" color="#f7797d" />
+              </template>
+            </v-expansion-panel-header>
+            <v-expansion-panel-content>
+              <CreateTrackForm />
+            </v-expansion-panel-content>
+          </v-card>
+        </v-expansion-panel>
+      </v-expansion-panels>
     </v-container>
   </v-img>
 </template>
@@ -32,10 +50,12 @@ import { mapState } from 'vuex';
 
 import { Action, Mutation } from '@/store/track.store';
 
+import CreateTrackForm from '@/components/CreateTrackForm';
 import TrackItem from '@/components/TrackItem';
 
 export default {
   components: {
+    CreateTrackForm,
     TrackItem
   },
   computed: {
@@ -78,6 +98,19 @@ export default {
   padding: 1vh;
   max-height: 190px;
   overflow: scroll;
+}
+
+.text {
+  color: #f7797d;
+  text-transform: uppercase;
+}
+
+.panels {
+  margin-top: 12px;
+}
+
+.panel-header:hover {
+  background-color: rgba(0, 0, 0, 0.02);
 }
 
 @media screen and (min-width: 500px) {

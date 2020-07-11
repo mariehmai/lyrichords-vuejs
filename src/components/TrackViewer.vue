@@ -1,5 +1,5 @@
 <template>
-  <v-card :elevation="2" shaped :loading="isLoading">
+  <v-card :loading="isLoading">
     <v-card-text class="zoom">
       <v-slider v-model="zoom"
                 min="8"
