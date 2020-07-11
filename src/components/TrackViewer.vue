@@ -3,15 +3,15 @@
     <v-card-text class="zoom">
       <v-slider v-model="zoom"
                 min="8"
-                max="30"
+                max="20"
       >
         <template v-slot:prepend>
-          <v-btn icon @click="decrement">
+          <v-btn icon class="icon" @click="decrement">
             <font-awesome-icon :icon="['fa', 'search-minus']" />
           </v-btn>
         </template>
         <template v-slot:append>
-          <v-btn icon @click="increment">
+          <v-btn icon class="icon" @click="increment">
             <font-awesome-icon :icon="['fa', 'search-plus']" />
           </v-btn>
         </template>
@@ -39,7 +39,7 @@ export default {
   },
   data() {
     return {
-      zoom: 16
+      zoom: 14
     };
   },
   computed: {
@@ -62,6 +62,10 @@ export default {
 </script>
 
 <style scoped>
+.icon {
+  margin-top: -6px;
+}
+
 .zoom {
   width: 50%;
   padding-bottom: 0;

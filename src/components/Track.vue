@@ -8,7 +8,7 @@
         <v-img :src="track.cover" />
       </v-avatar>
       <div>
-        <v-card-title>
+        <v-card-title class="title">
           <span v-if="!editing">
             {{ track.artist }} - {{ track.title }}
           </span>
@@ -128,6 +128,10 @@ export default {
 </script>
 
 <style scoped>
+.title {
+  padding-top: 0;
+}
+
 .metadata {
   display: flex;
   flex-direction: row;
