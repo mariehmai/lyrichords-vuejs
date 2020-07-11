@@ -4,6 +4,7 @@
       <v-card v-if="filteredTracks.length"
               class="track-list"
               three-line
+              :disabled="editing"
       >
         <div v-for="t in filteredTracks" :key="t.id">
           <TrackItem
@@ -39,12 +40,13 @@ export default {
   },
   computed: {
     ...mapState({
+      editing: state => state.Track.editing,
       search: state => state.Track.search,
       selectedTrack: state => state.Track.selectedTrack,
       tracks: state => state.Track.tracks
     }),
     filteredTracks() {
-      return this.tracks.filter(track => 
+      return this.tracks.filter(track =>
         track.title.toLowerCase().includes(this.search.toLowerCase()) ||
         track.artist.toLowerCase().includes(this.search.toLowerCase())
       );

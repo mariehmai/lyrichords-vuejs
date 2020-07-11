@@ -19,14 +19,12 @@
       </v-expansion-panels>
     </div>
     <div class="track-viewer-container">
-      <TrackViewer class="track-viewer" type="track" :children="selectedTrack" />
+      <TrackViewer class="track-viewer" type="track" />
     </div>
   </div>
 </template>
 
 <script>
-import { mapState } from 'vuex';
-
 import CreateTrackForm from '@/components/CreateTrackForm';
 import TrackList from '@/components/TrackList';
 import TrackViewer from '@/components/TrackViewer';
@@ -41,11 +39,6 @@ export default {
     return {
       panel: []
     };
-  },
-  computed: {
-    ...mapState({
-      selectedTrack: state => state.Track.selectedTrack
-    })
   }
 };
 </script>

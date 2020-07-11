@@ -1,9 +1,9 @@
 <template>
-  <v-card :elevation="2">
+  <v-card :elevation="2" shaped :loading="isLoading">
     <v-card-text class="zoom">
       <v-slider v-model="zoom"
-                min="12"
-                max="20"
+                min="8"
+                max="30"
       >
         <template v-slot:prepend>
           <v-btn icon @click="decrement">
@@ -20,17 +20,14 @@
 
     <Track
       v-if="type === 'track'"
-      :title="children.title"
-      :artist="children.artist"
-      :genre="children.genre"
-      :cover="children.cover"
-      :lyrics="children.lyrics"
-      :custom-style="{ fontSize: zoom + 'px', paddingBottom: paddingText + 'vh' }"
+      :custom-style="{ fontSize: zoom + 'px'}"
     />
   </v-card>
 </template>
 
 <script>
+import { mapState } from 'vuex';
+
 import Track from '@/components/Track';
 
 export default {
@@ -38,23 +35,27 @@ export default {
     Track
   },
   props: {
-    type: { type: String, default: '' },
-    children: { type: Object, required: true }
+    type: { type: String, default: '' }
   },
   data() {
     return {
-      zoom: 16,
-      paddingText: 0
+      zoom: 16
     };
+  },
+  computed: {
+    ...mapState({
+      selectedTrack: state => state.Track.selectedTrack
+    }),
+    isLoading() {
+      return !this.selectedTrack.title;
+    }
   },
   methods: {
     decrement() {
       this.zoom--;
-      if (this.marginText > 0) this.marginText -= 0.4;
     },
     increment() {
       this.zoom++;
-      if (this.zoom < 20) this.marginText += 0.4;
     }
   }
 };
