@@ -8,7 +8,7 @@
       >
         <div v-for="t in filteredTracks" :key="t.id">
           <TrackItem
-            class="track-item"
+            :class="{ selected: isSelected(t.id) }"
             :click="() => updateSelectedTrack(t.id)"
             :artist="t.artist"
             :title="t.title"
@@ -81,6 +81,9 @@ export default {
     }
   },
   methods: {
+    isSelected(id) {
+      return this.selectedTrack.id === id;
+    },
     updateSelectedTrack(id) {
       const selectedTrack = this.tracks.find((track) => track.id === id);
       this.$store.commit(Mutation.SET_SELECTED_TRACK, selectedTrack);
@@ -95,7 +98,7 @@ export default {
   flex-direction: column;
   flex: 2;
   justify-content: flex-start;
-  padding: 1vh;
+  padding: 1vh 0;
   max-height: 190px;
   overflow: scroll;
 }
@@ -111,6 +114,11 @@ export default {
 
 .panel-header:hover {
   background-color: rgba(0, 0, 0, 0.02);
+}
+
+.selected,
+.track-item:hover {
+  background-color: rgba(247, 121, 125, .3);
 }
 
 @media screen and (min-width: 500px) {
