@@ -1,7 +1,10 @@
 <template>
   <v-img gradient="to bottom right, rgb(251,215,124,.2), rgb(251,215,124,1), #f7797d">
     <v-container>
-      <v-card v-if="filteredTracks.length" three-line class="track-list">
+      <v-card v-if="filteredTracks.length"
+              class="track-list"
+              three-line
+      >
         <div v-for="t in filteredTracks" :key="t.id">
           <TrackItem
             class="track-item"
@@ -14,7 +17,7 @@
           <v-divider />
         </div>
       </v-card>
-      <v-card v-else class="track-list">
+      <v-card v-else class="track-list" loading>
         <v-list-item class="track-item">
           No results
         </v-list-item>
@@ -47,7 +50,7 @@ export default {
       );
     }
   },
-  mounted() {
+  beforeMount() {
     this.$store.dispatch(Action.FETCH_TRACKS);
   },
   updated() {
@@ -71,18 +74,17 @@ export default {
   flex: 2;
   justify-content: flex-start;
   padding: 1vh;
-  max-height: 400px;
+  max-height: 190px;
   overflow: scroll;
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (min-width: 500px) {
   .track-list {
-    max-height: 190px;
-    flex-wrap: wrap;
+    max-height: 400px;
   }
-}
-
-.track-item {
-  min-width: 350px;
+  
+  .track-item {
+    min-width: 350px;
+  }
 }
 </style>

@@ -10,7 +10,7 @@
         placeholder="lyrichords@example.com"
         outlined
       />
-      <v-text-field v-model="password" 
+      <v-text-field v-model="password"
                     label="Password"
                     placeholder="＊＊＊＊＊＊＊＊"
                     outlined
@@ -18,6 +18,7 @@
       <v-btn color="secondary"
              type="submit"
              block
+             :loading="loading"
       >
         Log in
       </v-btn>
@@ -32,15 +33,20 @@ export default {
   data() {
     return {
       email: 'mai.mariehelene@gmail.com',
-      password: 'passpass'
+      password: 'passpass',
+      loading: false
     };
   },
   methods: {
-    login() {
-      this.$store.dispatch(Action.LOGIN, {
+    async login() {
+      this.loading = true;
+
+      await this.$store.dispatch(Action.LOGIN, {
         email: this.email,
         password: this.password
       });
+
+      this.loading = false;
     }
   }
 };
