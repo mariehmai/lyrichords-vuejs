@@ -9,7 +9,19 @@
       </v-avatar>
       <div>
         <v-card-title>
-          {{ track.artist }} - {{ track.title }}
+          <span v-if="!editing">
+            {{ track.artist }} - {{ track.title }}
+          </span>
+          <v-text-field
+            v-if="editing"
+            v-model="track.artist"
+            label="Artist"
+          />
+          <v-text-field
+            v-if="editing"
+            v-model="track.title"
+            label="Title"
+          />
           <v-tooltip v-if="!editing" bottom>
             <template v-slot:activator="{ on, attrs }">
               <v-btn icon fab
@@ -52,19 +64,25 @@
             </v-tooltip>
           </div>
         </v-card-title>
-        <v-card-text v-if="!!track.genre">
+        <v-card-text v-if="!editing">
           {{ $t('genre') }}: {{ track.genre }}
+        </v-card-text>
+        <v-card-text v-if="editing">
+          <v-text-field
+            v-model="track.genre"
+            placeholder="Pop"
+            label="Genre"
+          />
         </v-card-text>
       </div>
     </div>
     <v-divider />
     <v-card-text>
       <v-textarea v-if="editing"
-                  v-model="lyrics"
+                  v-model="track.lyrics"
                   outlined
                   rows="15"
                   :disabled="loading"
-                  @input="editLyrics"
       />
       <pre v-else class="content" :style="customStyle">
       {{ track.lyrics }}
@@ -84,42 +102,26 @@ export default {
   },
   data() {
     return {
-      loading: false,
-      lyrics: '',
-      track: {}
+      loading: false
     };
   },
   computed: {
      ...mapState({
       editing: state => state.Track.editing,
-      selectedTrack: state => state.Track.selectedTrack
+      track: state => state.Track.selectedTrack
     })
-  },
-  updated() {
-    if (this.track !== this.selectedTrack) {
-      this.track = this.selectedTrack;
-    }
   },
   methods: {
     toggleEdit() {
       this.$store.commit(Mutation.SET_EDITING, !this.editing);
-
-      this.lyrics = this.track.lyrics;
     },
     async save() {
       this.loading = true;
   
-      this.$store.dispatch(Action.UPDATE_TRACK, {
-          ...this.track,
-        genre: this.track.genre || 'Unknown',
-        lyrics: this.lyrics
-      });
+      this.$store.dispatch(Action.UPDATE_TRACK, this.track);
       this.toggleEdit();
 
       this.loading = false;
-    },
-     editLyrics(updatedLyrics) {
-      this.lyrics = updatedLyrics;
     }
   }
 };
