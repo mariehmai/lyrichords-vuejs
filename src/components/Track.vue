@@ -9,7 +9,7 @@
       </v-avatar>
       <div>
         <v-card-title class="title">
-          <span v-if="!editing">
+          <span v-if="!editing && track.title">
             {{ track.artist }} - {{ track.title }}
           </span>
           <v-text-field
