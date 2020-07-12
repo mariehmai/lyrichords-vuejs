@@ -17,7 +17,7 @@ export default {
     user: {}
   },
   getters: {
-    loggedIn: state => !!state.user
+    loggedIn: state => !!state.user.email
   },
   mutations: {
     async [Mutation.SET_ME](state, payload) {
@@ -52,7 +52,8 @@ export default {
       const { user } = await firebase.auth.createUserWithEmailAndPassword(email, password);
     
       await firebase.usersCollection.doc(user.uid).set({
-        name
+        name,
+        email
       });
     
       dispatch(Action.FETCH_ME, user);

@@ -2,9 +2,16 @@
   <v-app-bar app>
     <div class="text-uppercase headline logo">
       <v-img class="image" :src="require('@/assets/logo.svg')" />
-      <span class="app-name font-weight-light">{{ appName }}</span>
+      <span :class="{
+        'font-weight-light': true,
+        'app-name': loggedIn
+      }"
+      >
+        {{ appName }}
+      </span>
     </div>
-    <v-text-field class="search"
+    <v-text-field v-if="loggedIn"
+                  class="search"
                   outlined
                   dense
                   hide-details
@@ -12,17 +19,14 @@
                   placeholder="Song title, artist, ..."
                   @input="updateSearch"
     />
-    <template v-slot:actions>
-      <font-awesome-icon :icon="['fa', 'plus']" color="#f7797d" />
-    </template>
-    <v-btn icon @click="logout">
+    <v-btn v-if="loggedIn" icon @click="logout">
       <font-awesome-icon :icon="['fa', 'sign-out-alt']" />
     </v-btn>
   </v-app-bar>
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapGetters } from 'vuex';
 
 import { Action } from '@/store/auth.store';
 import { Mutation } from '@/store/track.store';
@@ -34,7 +38,10 @@ export default {
   computed: {
     ...mapState({
       tracks: state => state.Track.tracks
-    })
+    }),
+    ...mapGetters([
+      'loggedIn'
+    ])
   },
   methods: {
     updateSearch(search) {
