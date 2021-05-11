@@ -1,4 +1,4 @@
-# lyrichords
+# [lyrichords](https://lyrichords.netlify.app/)
 
 [![CircleCI](https://circleci.com/gh/mariehmai/lyrichords.svg?style=svg)](https://circleci.com/gh/mariehmai/lyrichords)
 
