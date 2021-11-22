@@ -1,4 +1,4 @@
-# [lyrichords](https://lyrichords.netlify.app/)
+# [lyrichords](https://lyrichords.xyz)
 
 [![CircleCI](https://circleci.com/gh/mariehmai/lyrichords.svg?style=svg)](https://circleci.com/gh/mariehmai/lyrichords)
 
@@ -18,12 +18,6 @@ npm run serve
 
 ```
 npm run build
-```
-
-### Run your tests
-
-```
-npm run test
 ```
 
 ### Lints and fixes files
