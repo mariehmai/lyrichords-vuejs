@@ -13,6 +13,7 @@
       <v-text-field v-model="password"
                     label="Password"
                     placeholder="＊＊＊＊＊＊＊＊"
+                    type="password"
                     outlined
       />
       <v-btn color="secondary"
