@@ -3,9 +3,9 @@
 FROM node:10.16.3-alpine as build-stage
 WORKDIR /app
 COPY package*.json ./
-RUN npm install
+RUN yarn install
 COPY . .
-RUN npm run build
+RUN yarn build
 
 # Production stage
 
