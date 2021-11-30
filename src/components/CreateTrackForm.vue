@@ -22,10 +22,7 @@
       :rules="requiredRule"
       required
     />
-    <v-btn small
-           color="primary"
-           type="submit"
-    >
+    <v-btn small type="submit">
       Add song
     </v-btn>
   </v-form>
@@ -48,7 +45,7 @@ export default {
   methods: {
     createTrack() {
       this.$refs.form.validate();
-      
+
       if (this.valid) {
         this.$store.dispatch(Action.CREATE_TRACK, {
           artist: this.artist,

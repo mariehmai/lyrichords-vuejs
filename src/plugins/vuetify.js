@@ -20,10 +20,15 @@ export default new Vuetify({
     iconfont: 'faSvg'
   },
   theme: {
+    dark: true,
     themes: {
       light: {
-        primary: '#f7797d',
-        secondary: '#f7797d'
+        primary: '#3A6073',
+        secondary: '#3A6073'
+      },
+      dark: {
+        primary: '#whitesmoke',
+        secondary: '#272727'
       }
     }
   }

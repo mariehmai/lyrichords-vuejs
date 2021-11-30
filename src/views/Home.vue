@@ -36,10 +36,6 @@ export default {
 
 .track-viewer-container {
   flex: 3;
-  padding: 1.5vh;
-}
-
-.track-viewer {
-  margin: 1vh 0.5vh;
+  padding: 12px 12px 12px 0;
 }
 </style>

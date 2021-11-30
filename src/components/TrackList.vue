@@ -1,5 +1,5 @@
 <template>
-  <v-img gradient="to bottom right, rgb(251,215,124,.2), rgb(251,215,124,1), #f7797d">
+  <v-img>
     <v-container>
       <v-card v-if="filteredTracks.length"
               class="track-list"
@@ -32,7 +32,7 @@
                 Add a song
               </h4>
               <template v-slot:actions>
-                <font-awesome-icon :icon="['fa', 'plus']" color="#f7797d" />
+                <font-awesome-icon :icon="['fa', 'plus']" />
               </template>
             </v-expansion-panel-header>
             <v-expansion-panel-content>
@@ -104,7 +104,6 @@ export default {
 }
 
 .text {
-  color: #f7797d;
   text-transform: uppercase;
 }
 
@@ -116,16 +115,15 @@ export default {
   background-color: rgba(0, 0, 0, 0.02);
 }
 
-.selected,
-.track-item:hover {
-  background-color: rgba(247, 121, 125, .3);
+.selected {
+  background-color: #272727;
 }
 
 @media screen and (min-width: 500px) {
   .track-list {
     max-height: 400px;
   }
-  
+
   .track-item {
     min-width: 350px;
   }
